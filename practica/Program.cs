@@ -120,3 +120,32 @@
 //    }
 //}
 //8
+//Console.WriteLine("Выберите фигуру которой вы хотите вычислить площадь(круг, треугольник, прямоугольник)");
+//string figura = Console.ReadLine();
+//double rezult = 0;
+//if (figura == "круг")
+//{
+//    Console.WriteLine("Введите радиус: ");
+//    int rad = int.Parse(Console.ReadLine());
+//    rezult = 3.14 * rad * rad;
+//    Console.WriteLine($"Площадь круга равна {rezult}");
+//}
+//if (figura == "треугольник")
+//{
+//    Console.WriteLine("Введите основание: ");
+//    int osn = int.Parse(Console.ReadLine());
+//    Console.WriteLine("Введите высоту: ");
+//    int vus = int.Parse(Console.ReadLine());
+//    rezult = 0.5 * osn * vus;
+//    Console.WriteLine($"Площадь треугольника равна {rezult}");
+//}
+//if (figura == "прямоугольник")
+//{
+//    Console.WriteLine("Введите ширину: ");
+//    int a = int.Parse(Console.ReadLine());
+//    Console.WriteLine("Введите длину: ");
+//    int b = int.Parse(Console.ReadLine());
+//    rezult = a * b;
+//    Console.WriteLine($"Площадь прямоугольник равна {rezult}");
+//}
+//9
