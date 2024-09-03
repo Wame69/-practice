@@ -149,3 +149,52 @@
 //    Console.WriteLine($"Площадь прямоугольник равна {rezult}");
 //}
 //9
+//Console.WriteLine("Введите 1 для перевода единиц длины\n2 - для перевода единиц массы");
+//int flag = Convert.ToInt16(Console.ReadLine());
+
+//if (flag == 1)
+//{
+//    Console.WriteLine("Введите количество единиц: ");
+//    double count = Convert.ToDouble(Console.ReadLine());
+
+//    Console.WriteLine("Введите единицы измерения:\n1 - километры\n2 - метры\n3 - сантиметры\n4 - миллиметры");
+//    flag = Convert.ToInt16(Console.ReadLine());
+
+//    if (flag == 1)
+//    {
+//        Console.WriteLine($"Результат:\n" + count + " километров\n" + count * 1000 + " метров\n" + count * 100000 + " сантиметров\n" + count * 1000000 + " миллметров");
+//    }
+//    if (flag == 2)
+//    {
+//        Console.WriteLine($"Результат:\n" + count / 1000 + " километров\n" + count + " метров\n" + count * 100 + " сантиметров\n" + count * 1000 + " миллметров");
+//    }
+
+//    if (flag == 3)
+//    {
+//        Console.WriteLine($"Результат:\n" + count / 100000 + " километров\n" + count / 100 + " метров\n" + count + " сантиметров\n" + count * 10 + " миллметров");
+//    }
+//    if (flag == 4)
+//    {
+//        Console.WriteLine($"Результат:\n" + count / 1000000 + " километров\n" + count / 1000 + " метров\n" + count / 10 + " сантиметров\n" + count + " миллметров");
+//    }
+//}
+//else if (flag == 2)
+//{
+//    Console.WriteLine("Введите кколичество единиц: ");
+//    double count = Convert.ToInt16(Console.ReadLine());
+
+//    Console.WriteLine("Введите единицы измерения:\n1 - тонны\n2 - килограммы\n3 - граммы");
+//    flag = Convert.ToInt16(Console.ReadLine());
+
+//    if (flag == 1) {
+//        Console.WriteLine("Результат:\n" + count + " тонн\n" + count * 1000 + " килограмм\n" + count * 1000000 + " грамм");
+//    }
+//    if (flag == 2)
+//    {
+//        Console.WriteLine("Результат:\n" + count / 1000 + " тонн\n" + count  + " килограмм\n" + count * 1000 + " грамм");
+//    }
+//    if (flag == 3)
+//    {
+//        Console.WriteLine("Результат:\n" + count / 1000000 + " тонн\n" + count / 1000 + " килограмм\n" + count + " грамм");
+//    }
+//}
