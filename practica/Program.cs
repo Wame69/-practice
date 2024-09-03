@@ -322,66 +322,37 @@
 //}
 //Console.WriteLine($"Минимальный элемент: {minElement} (индекс: {minIndex})");
 //Console.WriteLine($"Максимальный элемент: {maxElement} (индекс: {maxIndex})");
-using System;
+//13          
+//int[] arr = {1, 324, 23, 358, 2, 5, 3, 6, 7, 3, 45, 23, 642, 35, 543};
+//Array.Sort(arr);
+//Console.WriteLine("Отсортированный по возрастанию массив:");
+//foreach (int element in arr)
+//{
+//    Console.Write($"{element} ");
+//}
+//Console.WriteLine();
+//// Сортировка по убыванию
+//Array.Sort(arr, new Comparison<int>((a, b) => b.CompareTo(a)));
+//Console.WriteLine("Отсортированный по убыванию массив:");
+//foreach (int element in arr)
+//{
+//    Console.Write($"{element} ");
+//}
+//Console.WriteLine();
 
-namespace SortingAlgorithms
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Ввод значений в массив
-            Console.Write("Введите элементы массива, разделённые пробелами: ");
-            int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
-
-            // Сортировка по возрастанию
-            Array.Sort(arr);
-            Console.WriteLine("Отсортированный по возрастанию массив:");
-            foreach (int element in arr)
-            {
-                Console.Write($"{element} ");
-            }
-            Console.WriteLine();
-
-            // Сортировка по убыванию
-            Array.Sort(arr, new Comparison<int>((a, b) => b.CompareTo(a)));
-            Console.WriteLine("Отсортированный по убыванию массив:");
-            foreach (int element in arr)
-            {
-                Console.Write($"{element} ");
-            }
-            Console.WriteLine();
-        }
-    }
-}
-using System;
-
-namespace ElementSearcher
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Ввод значений в массив
-            Console.Write("Введите элементы массива, разделённые пробелами: ");
-            int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
-
-            // Ввод искомого элемента
-            Console.Write("Введите искомый элемент: ");
-            int element = int.Parse(Console.ReadLine());
-
-            // Поиск элемента
-            int index = Array.IndexOf(arr, element);
-
-            // Вывод результата
-            if (index >= 0)
-            {
-                Console.WriteLine($"Элемент найден на индексе {index}.");
-            }
-            else
-            {
-                Console.WriteLine("Элемент не найден.");
-            }
-        }
-    }
-}
+//14
+//int[] arr = { 1, 324, 23, 358, 2, 5, 3, 6, 7, 3, 45, 23, 642, 35, 543 };
+//// Ввод искомого элемента
+//Console.Write("Введите искомый элемент: ");
+//int element = int.Parse(Console.ReadLine());
+//// Поиск элемента
+//int index = Array.IndexOf(arr, element);
+//// Вывод результата
+//if (index >= 0)
+//{
+//   Console.WriteLine($"Элемент найден на индексе {index + 1}.");
+//}
+//else
+//{
+//   Console.WriteLine("Элемент не найден.");
+//}
