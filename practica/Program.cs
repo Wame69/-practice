@@ -356,3 +356,53 @@
 //{
 //   Console.WriteLine("Элемент не найден.");
 //}
+using System;
+
+namespace ReverseArrayPrinter
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Ввод значений в массив
+            Console.Write("Введите элементы массива, разделённые пробелами: ");
+            int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+
+            // Вывод элементов в обратном порядке
+            Console.WriteLine("Элементы массива в обратном порядке:");
+            for (int i = arr.Length - 1; i >= 0; i--)
+            {
+                Console.Write($"{arr[i]} ");
+            }
+            Console.WriteLine();
+        }
+    }
+}Matrix(transposedMatrix1);
+
+            // Транспонирование второй матрицы
+            int[,] transposedMatrix2 = new int[cols2, rows2];
+            for (int i = 0; i < rows2; i++)
+            {
+                for (int j = 0; j < cols2; j++)
+                {
+                    transposedMatrix2[j, i] = matrix2[i, j];
+                }
+            }
+
+            Console.WriteLine("Транспонированная вторая матрица:");
+            PrintMatrix(transposedMatrix2);
+        }
+
+        static void PrintMatrix(int[,] matrix)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    Console.Write($"{matrix[i, j]} ");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
