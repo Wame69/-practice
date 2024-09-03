@@ -30,6 +30,7 @@
 //    rezult = a * d;
 //    Console.WriteLine($"Умножение чисел равна{rezult}");
 //}
+
 //2
 //Console.WriteLine("Введите строку");
 //string str = Console.ReadLine();
@@ -47,6 +48,7 @@
 //    }
 //}
 //Console.WriteLine($"Символов в строке {str.Length}, слов в строку {b + 1}, предложений в строке {c}");
+
 //3
 //Console.WriteLine("Таблица умножения!");
 //for (int i = 0; i < 10; i++)
@@ -56,6 +58,7 @@
 //        Console.WriteLine(i + " * " + j + " = " + i * j);
 //    }
 //}
+
 //4
 //Console.WriteLine("Введите число");
 //int num = int.Parse(Console.ReadLine());
@@ -65,6 +68,7 @@
 //    fac = fac * i;
 //}
 //Console.WriteLine($"Число фибоначчи{fac}");
+
 //5
 //Console.WriteLine("Введите число: ");
 //int n = Convert.ToInt32(Console.ReadLine());
@@ -74,6 +78,7 @@
 //    Console.Write("{0} ", i);
 //    j = i - j;
 //}
+
 //6
 //class program
 //{
@@ -100,6 +105,7 @@
 //        }
 //    }
 //}
+
 //7
 //Random random = new Random();
 //int rand = random.Next(0, 100);
@@ -119,6 +125,7 @@
 //        num--;
 //    }
 //}
+
 //8
 //Console.WriteLine("Выберите фигуру которой вы хотите вычислить площадь(круг, треугольник, прямоугольник)");
 //string figura = Console.ReadLine();
@@ -148,6 +155,7 @@
 //    rezult = a * b;
 //    Console.WriteLine($"Площадь прямоугольник равна {rezult}");
 //}
+
 //9
 //Console.WriteLine("Введите 1 для перевода единиц длины\n2 - для перевода единиц массы");
 //int flag = Convert.ToInt16(Console.ReadLine());
@@ -199,6 +207,7 @@
 //    }
 //}
 //10
+
 //Console.WriteLine("Введите любое число: ");
 //double a = int.Parse(Console.ReadLine());
 //Console.WriteLine("Введите процент");
@@ -207,6 +216,7 @@
 //rezult = a * b/100;
 //Console.WriteLine(rezult);
 //11
+
 //Console.WriteLine("Выберите валюту которую хотите перевести (рубли, доллар, евро, йена)");
 //string vall = Console.ReadLine();
 //double rezult = 0;
@@ -302,6 +312,7 @@
 
 //}
 //12
+
 //int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 //int minElement = arr[0];
 //int maxElement = arr[0];
@@ -322,7 +333,8 @@
 //}
 //Console.WriteLine($"Минимальный элемент: {minElement} (индекс: {minIndex})");
 //Console.WriteLine($"Максимальный элемент: {maxElement} (индекс: {maxIndex})");
-//13          
+//13   
+
 //int[] arr = {1, 324, 23, 358, 2, 5, 3, 6, 7, 3, 45, 23, 642, 35, 543};
 //Array.Sort(arr);
 //Console.WriteLine("Отсортированный по возрастанию массив:");
@@ -356,53 +368,13 @@
 //{
 //   Console.WriteLine("Элемент не найден.");
 //}
-using System;
 
-namespace ReverseArrayPrinter
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            // Ввод значений в массив
-            Console.Write("Введите элементы массива, разделённые пробелами: ");
-            int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
-
-            // Вывод элементов в обратном порядке
-            Console.WriteLine("Элементы массива в обратном порядке:");
-            for (int i = arr.Length - 1; i >= 0; i--)
-            {
-                Console.Write($"{arr[i]} ");
-            }
-            Console.WriteLine();
-        }
-    }
-}Matrix(transposedMatrix1);
-
-            // Транспонирование второй матрицы
-            int[,] transposedMatrix2 = new int[cols2, rows2];
-            for (int i = 0; i < rows2; i++)
-            {
-                for (int j = 0; j < cols2; j++)
-                {
-                    transposedMatrix2[j, i] = matrix2[i, j];
-                }
-            }
-
-            Console.WriteLine("Транспонированная вторая матрица:");
-            PrintMatrix(transposedMatrix2);
-        }
-
-        static void PrintMatrix(int[,] matrix)
-        {
-            for (int i = 0; i < matrix.GetLength(0); i++)
-            {
-                for (int j = 0; j < matrix.GetLength(1); j++)
-                {
-                    Console.Write($"{matrix[i, j]} ");
-                }
-                Console.WriteLine();
-            }
-        }
-    }
-}
+//15
+//Console.Write("Введите элементы массива, разделённые пробелами: ");
+//int[] arr = Array.ConvertAll(Console.ReadLine().Split(' '), int.Parse);
+//Console.WriteLine("Элементы массива в обратном порядке:");
+//for (int i = arr.Length - 1; i >= 0; i--)
+//{
+//    Console.Write($"{arr[i]} ");
+//}
+//Console.WriteLine();
