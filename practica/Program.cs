@@ -198,3 +198,127 @@
 //        Console.WriteLine("Результат:\n" + count / 1000000 + " тонн\n" + count / 1000 + " килограмм\n" + count + " грамм");
 //    }
 //}
+//10
+//Console.WriteLine("Введите любое число: ");
+//double a = int.Parse(Console.ReadLine());
+//Console.WriteLine("Введите процент");
+//int b = int.Parse(Console.ReadLine());
+//double rezult = 0;
+//rezult = a * b/100;
+//Console.WriteLine(rezult);
+//11
+//Console.WriteLine("Выберите валюту которую хотите перевести (рубли, доллар, евро, йена)");
+//string vall = Console.ReadLine();
+//double rezult = 0;
+//if (vall == "рубли")
+//{
+//    Console.WriteLine("Введите сумму: ");
+//    double summa = int.Parse(Console.ReadLine());
+//    Console.WriteLine("Выберите валюту в которую хотите перевести (доллар, евро, йена)");
+//    vall = Console.ReadLine();
+//    if(vall == "доллар")
+//    {
+//        rezult = summa * 0.011;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "евро")
+//    {
+//        rezult = summa * 0.010074;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "йена")
+//    {
+//        rezult = summa * 1.62;
+//        Console.WriteLine(rezult);
+//    }
+//}
+//if (vall == "доллар")
+//{
+//    Console.WriteLine("Введите сумму: ");
+//    double summa = int.Parse(Console.ReadLine());
+//    Console.WriteLine("Выберите валюту в которую хотите перевести (рубли, евро, йена)");
+//    vall = Console.ReadLine();
+//    if (vall == "рубли")
+//    {
+//        rezult = summa * 90;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "евро")
+//    {
+//        rezult = summa * 0.90373;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "йена")
+//    {
+//        rezult = summa * 146.64;
+//        Console.WriteLine(rezult);
+//    }
+
+//}
+//if (vall == "евро")
+//{
+//    Console.WriteLine("Введите сумму: ");
+//    double summa = int.Parse(Console.ReadLine());
+//    Console.WriteLine("Выберите валюту в которую хотите перевести (рубли, доллар, йена)");
+//    vall = Console.ReadLine();
+//    if (vall == "рубли")
+//    {
+//        rezult = summa * 99.26;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "доллар")
+//    {
+//        rezult = summa * 1.11;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "йена")
+//    {
+//        rezult = summa * 162.26;
+//        Console.WriteLine(rezult);
+//    }
+
+//}
+//if (vall == "йена")
+//{
+//    Console.WriteLine("Введите сумму: ");
+//    double summa = int.Parse(Console.ReadLine());
+//    Console.WriteLine("Выберите валюту в которую хотите перевести (рубли, доллар, евро)");
+//    vall = Console.ReadLine();
+//    if (vall == "рубли")
+//    {
+//        rezult = summa * 0.615604;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "доллар")
+//    {
+//        rezult = summa * 0.006819;
+//        Console.WriteLine(rezult);
+//    }
+//    if (vall == "евро")
+//    {
+//        rezult = summa * 0.006163;
+//        Console.WriteLine(rezult);
+//    }
+
+//}
+//12
+//int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
+//int minElement = arr[0];
+//int maxElement = arr[0];
+//int minIndex = 0;
+//int maxIndex = 0;
+//for (int i = 1; i < arr.Length; i++)
+//{
+//  if (arr[i] < minElement)
+//  {
+//    minElement = arr[i];
+//    minIndex = i;
+//  }
+//  else if (arr[i] > maxElement)
+//  {
+//     maxElement = arr[i];
+//     maxIndex = i;
+//  }
+//}
+//Console.WriteLine($"Минимальный элемент: {minElement} (индекс: {minIndex})");
+//Console.WriteLine($"Максимальный элемент: {maxElement} (индекс: {maxIndex})");
