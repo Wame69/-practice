@@ -2070,3 +2070,866 @@ namespace StudentGradeSystem
 //        }
 //    }
 //}
+//41
+//using System;
+//using System.IO;
+
+//namespace CSVReader
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            string filePath = "file.csv"; 
+
+//            try
+//            {
+//                using (StreamReader reader = new StreamReader(filePath))
+//                {
+//                    string line;
+//                    while ((line = reader.ReadLine()) != null)
+//                    {
+//                        string[] values = line.Split(','); 
+                     
+//                        foreach (string value in values)
+//                        {
+//                            Console.Write($"{value,-20}"); 
+//                        }
+//                        Console.WriteLine();
+//                    }
+//                }
+//            }
+//            catch (Exception ex)
+//            {
+//                Console.WriteLine("Ошибка при чтении файла: " + ex.Message);
+//            }
+//        }
+//    }
+//}
+//42
+//using System;
+//namespace AverageTemperatureCalculator
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            double[] temperatures = new double[7];
+
+//            Console.WriteLine("Введите температуру для каждого дня недели:");
+
+//            for (int i = 0; i < 7; i++)
+//            {
+//                Console.Write($"День {i + 1}: ");
+//                if (double.TryParse(Console.ReadLine(), out double temperature))
+//                {
+//                    temperatures[i] = temperature;
+//                }
+//                else
+//                {
+//                    Console.WriteLine("Некорректный ввод. Попробуйте снова.");
+//                    i--;
+//                }
+//            }
+
+//            double sum = 0;
+//            foreach (double temperature in temperatures)
+//            {
+//                sum += temperature;
+//            }
+
+//            double averageTemperature = sum / 7;
+
+//            Console.WriteLine($"Средняя температура за неделю: {averageTemperature:F2} градусов.");
+//        }
+//    }
+//}
+//44
+//using System;
+//using System.IO;
+//using System.Collections.Generic;
+//using System.Linq;
+
+//namespace VersionControl
+//{
+//    class Program
+//    {
+//        static string directoryPath = @"C:\Users\Student406-11\Desktop\Практика ИСП 122";
+
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("Наблюдение за изменениями файлов в директории: " + directoryPath);
+//            List<string> trackedFiles = new List<string>();
+
+//            string[] files = Directory.GetFiles(directoryPath);
+//            foreach (string file in files)
+//            {
+//                trackedFiles.Add(file);
+//            }
+
+//            while (true)
+//            {
+
+//                foreach (string file in trackedFiles)
+//                {
+//                    if (File.Exists(file))
+//                    {
+//                        DateTime lastModifiedTime = File.GetLastWriteTime(file);
+//                        if (lastModifiedTime != GetLastCheckedTime(file))
+//                        {
+
+//                            string backupFileName = Path.Combine(directoryPath, Path.GetFileNameWithoutExtension(file) + "_" + lastModifiedTime.ToString("yyyyMMddHHmmss") + Path.GetExtension(file));
+//                            File.Copy(file, backupFileName);
+
+
+//                            SetLastCheckedTime(file, lastModifiedTime);
+
+//                            Console.WriteLine($"Файл '{file}' изменен. Сохранена резервная копия: '{backupFileName}'");
+//                        }
+//                    }
+//                    else
+//                    {
+
+//                        trackedFiles.Remove(file);
+//                        Console.WriteLine($"Файл '{file}' удален.");
+//                    }
+//                }
+
+//                Thread.Sleep(5000);
+//            }
+//        }
+
+//        static DateTime GetLastCheckedTime(string file)
+//        {
+//            string lastCheckedTimeFile = Path.Combine(directoryPath, Path.GetFileNameWithoutExtension(file) + ".checked");
+
+//            if (File.Exists(lastCheckedTimeFile))
+//            {
+//                return DateTime.Parse(File.ReadAllText(lastCheckedTimeFile));
+//            }
+//            else
+//            {
+//                return DateTime.MinValue;
+//            }
+//        }
+
+
+//        static void SetLastCheckedTime(string file, DateTime lastModifiedTime)
+//        {
+//            string lastCheckedTimeFile = Path.Combine(directoryPath, Path.GetFileNameWithoutExtension(file) + ".checked");
+//            File.WriteAllText(lastCheckedTimeFile, lastModifiedTime.ToString());
+//        }
+//    }
+//}
+
+
+//45
+//using System;
+//using System.IO;
+//using System.Collections.Generic;
+
+//namespace ReportGenerator
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("Генератор отчетов");
+//            Console.WriteLine("----------------");
+
+//            List<Sale> sales = new List<Sale>();
+//            while (true)
+//            {
+//                Console.WriteLine("\nВведите данные о продаже (или введите 'exit' для завершения):");
+//                Console.Write("Товар: ");
+//                string product = Console.ReadLine();
+//                if (product.ToLower() == "exit")
+//                {
+//                    break;
+//                }
+
+//                Console.Write("Количество: ");
+//                if (int.TryParse(Console.ReadLine(), out int quantity))
+//                {
+//                    Console.Write("Цена: ");
+//                    if (double.TryParse(Console.ReadLine(), out double price))
+//                    {
+//                        sales.Add(new Sale(product, quantity, price));
+//                    }
+//                    else
+//                    {
+//                        Console.WriteLine("Некорректный ввод цены.");
+//                    }
+//                }
+//                else
+//                {
+//                    Console.WriteLine("Некорректный ввод количества.");
+//                }
+//            }
+//            string report = GenerateSalesReport(sales);
+
+//            Console.Write("Введите имя файла для сохранения отчета: ");
+//            string fileName = Console.ReadLine();
+//            File.WriteAllText(fileName + ".txt", report);
+
+//            Console.WriteLine($"Отчет сохранен в файл '{fileName}.txt'");
+//        }
+
+//        class Sale
+//        {
+//            public string Product { get; set; }
+//            public int Quantity { get; set; }
+//            public double Price { get; set; }
+
+//            public Sale(string product, int quantity, double price)
+//            {
+//                Product = product;
+//                Quantity = quantity;
+//                Price = price;
+//            }
+//        }
+//        static string GenerateSalesReport(List<Sale> sales)
+//        {
+//            string report = "Отчет о продажах\n\n";
+//            report += "Товар | Количество | Цена | Сумма\n";
+//            report += "------- | -------- | -------- | --------\n";
+
+//            double totalAmount = 0;
+//            foreach (Sale sale in sales)
+//            {
+//                double amount = sale.Quantity * sale.Price;
+//                report += $"{sale.Product} | {sale.Quantity} | {sale.Price:C} | {amount:C}\n";
+//                totalAmount += amount;
+//            }
+
+//            report += "\nИтоговая сумма: " + totalAmount.ToString("C");
+
+//            return report;
+//        }
+//    }
+//}
+////46
+//using System;
+//using System.Collections.Generic;
+
+//namespace VisitorTracker
+//{
+//    class Program
+//    {
+//        static List<Visitor> visitors = new List<Visitor>();
+
+//        static void Main(string[] args)
+//        {
+//            while (true)
+//            {
+//                Console.WriteLine("Выберите действие:");
+//                Console.WriteLine("1. Добавить посетителя");
+//                Console.WriteLine("2. Отметить присутствие посетителя");
+//                Console.WriteLine("3. Вывести список всех посетителей");
+//                Console.WriteLine("4. Выход");
+
+//                Console.Write("Введите номер действия: ");
+//                string choice = Console.ReadLine();
+
+//                switch (choice)
+//                {
+//                    case "1":
+//                        AddVisitor();
+//                        break;
+//                    case "2":
+//                        MarkPresence();
+//                        break;
+//                    case "3":
+//                        PrintVisitorList();
+//                        break;
+//                    case "4":
+//                        Console.WriteLine("До свидания!");
+//                        return;
+//                    default:
+//                        Console.WriteLine("Некорректный выбор действия.");
+//                        break;
+//                }
+//            }
+//        }
+
+//        static void AddVisitor()
+//        {
+//            Console.Write("Введите имя посетителя: ");
+//            string name = Console.ReadLine();
+
+//            Console.Write("Введите email посетителя: ");
+//            string email = Console.ReadLine();
+
+//            visitors.Add(new Visitor(name, email));
+//            Console.WriteLine("Посетитель добавлен.");
+//        }
+
+//        static void MarkPresence()
+//        {
+//            Console.Write("Введите имя посетителя, которого нужно отметить: ");
+//            string name = Console.ReadLine();
+
+//            Visitor visitor = visitors.Find(v => v.Name == name);
+
+//            if (visitor != null)
+//            {
+//                visitor.IsPresent = true;
+//                Console.WriteLine($"Присутствие {visitor.Name} отмечено.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Посетитель не найден.");
+//            }
+//        }
+
+//        static void PrintVisitorList()
+//        {
+//            if (visitors.Count == 0)
+//            {
+//                Console.WriteLine("Список посетителей пуст.");
+//                return;
+//            }
+
+//            Console.WriteLine("\nСписок всех посетителей:");
+//            foreach (Visitor visitor in visitors)
+//            {
+//                Console.WriteLine($"Имя: {visitor.Name}, Email: {visitor.Email}, Присутствие: {visitor.IsPresent}");
+//            }
+//        }
+//    }
+
+//    class Visitor
+//    {
+//        public string Name { get; set; }
+//        public string Email { get; set; }
+//        public bool IsPresent { get; set; }
+
+//        public Visitor(string name, string email)
+//        {
+//            Name = name;
+//            Email = email;
+//            IsPresent = false;
+//        }
+//    }
+//}
+////47
+//using System;
+//using System.Collections.Generic;
+//using System.Threading;
+//using System.Threading.Tasks;
+
+//namespace TaskScheduler
+//{
+//    class Program
+//    {
+//        static List<TaskItem> tasks = new List<TaskItem>();
+
+//        static void Main(string[] args)
+//        {
+//            while (true)
+//            {
+//                Console.WriteLine("Выберите действие:");
+//                Console.WriteLine("1. Добавить задачу");
+//                Console.WriteLine("2. Вывести список задач");
+//                Console.WriteLine("3. Выход");
+
+//                Console.Write("Введите номер действия: ");
+//                string choice = Console.ReadLine();
+
+//                switch (choice)
+//                {
+//                    case "1":
+//                        AddTask();
+//                        break;
+//                    case "2":
+//                        PrintTaskList();
+//                        break;
+//                    case "3":
+//                        Console.WriteLine("До свидания!");
+//                        return;
+//                    default:
+//                        Console.WriteLine("Некорректный выбор действия.");
+//                        break;
+//                }
+//            }
+//        }
+
+//        static void AddTask()
+//        {
+//            Console.Write("Введите описание задачи: ");
+//            string description = Console.ReadLine();
+
+//            Console.Write("Введите время выполнения (чч:мм): ");
+//            if (DateTime.TryParseExact(Console.ReadLine(), "HH:mm", null, System.Globalization.DateTimeStyles.None, out DateTime executionTime))
+//            {
+//                tasks.Add(new TaskItem(description, executionTime));
+//                Console.WriteLine("Задача добавлена.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Некорректный формат времени.");
+//            }
+//        }
+
+//        static void PrintTaskList()
+//        {
+//            if (tasks.Count == 0)
+//            {
+//                Console.WriteLine("Список задач пуст.");
+//                return;
+//            }
+
+//            Console.WriteLine("\nСписок задач:");
+//            foreach (TaskItem task in tasks)
+//            {
+//                Console.WriteLine($"Описание: {task.Description}, Время выполнения: {task.ExecutionTime.ToString("HH:mm")}");
+//            }
+//        }
+//        static async Task CheckTasksAsync()
+//        {
+//            while (true)
+//            {
+//                foreach (TaskItem task in tasks)
+//                {
+//                    if (DateTime.Now >= task.ExecutionTime)
+//                    {
+//                        Console.WriteLine($"Время выполнения задачи: {task.Description}!");
+//                        Console.WriteLine($"Время выполнения: {task.ExecutionTime.ToString("HH:mm")}");
+//                        tasks.Remove(task);
+//                    }
+//                }
+
+//                await Task.Delay(60000);
+//            }
+//        }
+
+//        class TaskItem
+//        {
+//            public string Description { get; set; }
+//            public DateTime ExecutionTime { get; set; }
+
+//            public TaskItem(string description, DateTime executionTime)
+//            {
+//                Description = description;
+//                ExecutionTime = executionTime;
+//            }
+//        }
+//    }
+//}
+////48
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+
+//namespace SalesAnalysis
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            List<Sale> sales = new List<Sale>()
+//            {
+//                new Sale("Товар 1", 5, 200),
+//                new Sale("Товар 2", 3, 350),
+//                new Sale("Товар 1", 2, 400),
+//                new Sale("Товар 3", 1, 600)
+//            };
+
+//            Dictionary<string, SaleStatistics> salesStatistics = AnalyzeSales(sales);
+
+//            Console.WriteLine("Статистика продаж:");
+//            Console.WriteLine("------------------");
+       
+//            double totalSales = salesStatistics.Values.Sum(s => s.TotalAmount);
+//            Console.WriteLine($"Общая сумма продаж: {totalSales:C}");
+      
+//            foreach (KeyValuePair<string, SaleStatistics> stat in salesStatistics)
+//            {
+//                Console.WriteLine($"\nТовар: {stat.Key}");
+//                Console.WriteLine($"Количество проданных единиц: {stat.Value.QuantitySold}");
+//                Console.WriteLine($"Общая сумма продаж: {stat.Value.TotalAmount:C}");
+//            }
+//        }
+//        class Sale
+//        {
+//            public string Product { get; set; }
+//            public int Quantity { get; set; }
+//            public double Price { get; set; }
+
+//            public Sale(string product, int quantity, double price)
+//            {
+//                Product = product;
+//                Quantity = quantity;
+//                Price = price;
+//            }
+//        }
+
+//        class SaleStatistics
+//        {
+//            public int QuantitySold { get; set; }
+//            public double TotalAmount { get; set; }
+//        }
+//        static Dictionary<string, SaleStatistics> AnalyzeSales(List<Sale> sales)
+//        {
+//            Dictionary<string, SaleStatistics> salesStatistics = new Dictionary<string, SaleStatistics>();
+
+//            foreach (Sale sale in sales)
+//            {
+//                if (salesStatistics.ContainsKey(sale.Product))
+//                {
+//                    salesStatistics[sale.Product].QuantitySold += sale.Quantity;
+//                    salesStatistics[sale.Product].TotalAmount += sale.Quantity * sale.Price;
+//                }
+//                else
+//                {
+//                    salesStatistics.Add(sale.Product, new SaleStatistics()
+//                    {
+//                        QuantitySold = sale.Quantity,
+//                        TotalAmount = sale.Quantity * sale.Price
+//                    });
+//                }
+//            }
+
+//            return salesStatistics;
+//        }
+//    }
+//}
+////49
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+
+//namespace Hangman
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            string[] words = { "кошка", "собака", "птица", "рыба", "дерево", "дом", "солнце", "луна" };
+
+//            Random random = new Random();
+//            string secretWord = words[random.Next(words.Length)];
+//            char[] guessedWord = new char[secretWord.Length];
+//            for (int i = 0; i < secretWord.Length; i++)
+//            {
+//                guessedWord[i] = '_';
+//            }
+
+//            int attempts = 6;
+
+//            List<char> usedLetters = new List<char>();
+
+//            while (attempts > 0 && !guessedWord.SequenceEqual(secretWord.ToCharArray()))
+//            {
+//                Console.WriteLine("\n\nВиселица:");
+//                DrawHangman(attempts);
+
+//                Console.WriteLine("\nСлово:");
+//                PrintGuessedWord(guessedWord);
+
+//                Console.WriteLine("\nИспользованные буквы:");
+//                PrintUsedLetters(usedLetters);
+
+//                Console.Write("\nВведите букву: ");
+//                string letterInput = Console.ReadLine().ToLower();
+
+//                if (letterInput.Length != 1 || !char.IsLetter(letterInput[0]))
+//                {
+//                    Console.WriteLine("Некорректный ввод. Введите одну букву.");
+//                    continue;
+//                }
+
+//                char letter = letterInput[0];
+
+//                if (usedLetters.Contains(letter))
+//                {
+//                    Console.WriteLine("Эта буква уже использовалась.");
+//                    continue;
+//                }
+
+//                usedLetters.Add(letter);
+
+//                bool found = false;
+//                for (int i = 0; i < secretWord.Length; i++)
+//                {
+//                    if (secretWord[i] == letter)
+//                    {
+//                        guessedWord[i] = letter;
+//                        found = true;
+//                    }
+//                }
+//                if (!found)
+//                {
+//                    attempts--;
+//                    Console.WriteLine("Буквы нет в слове.");
+//                }
+//            }
+//            if (guessedWord.SequenceEqual(secretWord.ToCharArray()))
+//            {
+//                Console.WriteLine("\n\nПоздравляем! Вы угадали слово: " + secretWord);
+//            }
+//            else
+//            {
+//                Console.WriteLine("\n\nК сожалению, вы проиграли. Загаданное слово: " + secretWord);
+//            }
+
+//            Console.WriteLine("\nНажмите любую клавишу, чтобы выйти.");
+//            Console.ReadKey();
+//        }
+
+//        static void DrawHangman(int attempts)
+//        {
+//            Console.WriteLine("   --------");
+//            Console.WriteLine("   |      |");
+//            Console.WriteLine("   |      " + (attempts < 6 ? 'O' : ' '));
+//            Console.WriteLine("   |     " + (attempts < 4 ? '\\' : ' ') + (attempts < 5 ? '|' : ' ') + (attempts < 3 ? '/' : ' '));
+//            Console.WriteLine("   |      " + (attempts < 2 ? '|' : ' '));
+//            Console.WriteLine("   |     " + (attempts < 1 ? '/' : ' ') + (attempts < 0 ? '\\' : ' '));
+//            Console.WriteLine("   |");
+//            Console.WriteLine("   -");
+//        }
+
+//        static void PrintGuessedWord(char[] guessedWord)
+//        {
+//            foreach (char letter in guessedWord)
+//            {
+//                Console.Write(letter + " ");
+//            }
+//        }
+
+//        static void PrintUsedLetters(List<char> usedLetters)
+//        {
+//            Console.Write(" ");
+//            foreach (char letter in usedLetters)
+//            {
+//                Console.Write(letter + " ");
+//            }
+//        }
+//    }
+//}
+////50
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+
+//namespace SurveySystem
+//{
+//    class Program
+//    {
+//        static List<Survey> surveys = new List<Survey>();
+
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("Система опросов");
+//            Console.WriteLine("----------------");
+
+//            while (true)
+//            {
+//                Console.WriteLine("\nВыберите действие:");
+//                Console.WriteLine("1. Создать опрос");
+//                Console.WriteLine("2. Ответить на опрос");
+//                Console.WriteLine("3. Вывести результаты опроса");
+//                Console.WriteLine("4. Выход");
+
+//                Console.Write("Введите номер действия: ");
+//                string choice = Console.ReadLine();
+
+//                switch (choice)
+//                {
+//                    case "1":
+//                        CreateSurvey();
+//                        break;
+//                    case "2":
+//                        AnswerSurvey();
+//                        break;
+//                    case "3":
+//                        ShowResults();
+//                        break;
+//                    case "4":
+//                        Console.WriteLine("До свидания!");
+//                        return;
+//                    default:
+//                        Console.WriteLine("Некорректный выбор действия.");
+//                        break;
+//                }
+//            }
+//        }
+
+//        static void CreateSurvey()
+//        {
+//            Console.Write("Введите название опроса: ");
+//            string title = Console.ReadLine();
+
+//            Survey survey = new Survey(title);
+//            surveys.Add(survey);
+
+//            while (true)
+//            {
+//                Console.WriteLine("\nДобавить вопрос (или введите 'exit' для завершения):");
+//                Console.Write("Вопрос: ");
+//                string question = Console.ReadLine();
+//                if (question.ToLower() == "exit")
+//                {
+//                    break;
+//                }
+
+//                List<string> options = new List<string>();
+//                while (true)
+//                {
+//                    Console.WriteLine("\nДобавить вариант ответа (или введите 'exit' для завершения):");
+//                    Console.Write("Вариант ответа: ");
+//                    string option = Console.ReadLine();
+//                    if (option.ToLower() == "exit")
+//                    {
+//                        break;
+//                    }
+//                    options.Add(option);
+//                }
+
+//                survey.AddQuestion(new Question(question, options));
+//                Console.WriteLine("Вопрос добавлен.");
+//            }
+//        }
+
+//        static void AnswerSurvey()
+//        {
+//            if (surveys.Count == 0)
+//            {
+//                Console.WriteLine("Нет доступных опросов.");
+//                return;
+//            }
+
+//            Console.WriteLine("\nДоступные опросы:");
+//            for (int i = 0; i < surveys.Count; i++)
+//            {
+//                Console.WriteLine($"{i + 1}. {surveys[i].Title}");
+//            }
+
+//            Console.Write("Выберите номер опроса: ");
+//            if (int.TryParse(Console.ReadLine(), out int surveyIndex) && surveyIndex > 0 && surveyIndex <= surveys.Count)
+//            {
+//                Survey survey = surveys[surveyIndex - 1];
+
+//                Dictionary<int, int> answers = new Dictionary<int, int>();
+
+//                foreach (Question question in survey.Questions)
+//                {
+//                    Console.WriteLine($"\n{question.Text}");
+//                    for (int j = 0; j < question.Options.Count; j++)
+//                    {
+//                        Console.WriteLine($"{j + 1}. {question.Options[j]}");
+//                    }
+
+//                    Console.Write("Выберите вариант ответа: ");
+//                    if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= question.Options.Count)
+//                    {
+//                        if (!answers.ContainsKey(question.Id))
+//                        {
+//                            answers.Add(question.Id, 0);
+//                        }
+//                        answers[question.Id] = choice;
+//                    }
+//                    else
+//                    {
+//                        Console.WriteLine("Некорректный выбор варианта ответа.");
+//                    }
+//                }
+
+//                survey.RecordAnswers(answers);
+//                Console.WriteLine("\nСпасибо за участие в опросе!");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Некорректный выбор опроса.");
+//            }
+//        }
+
+//        static void ShowResults()
+//        {
+//            if (surveys.Count == 0)
+//            {
+//                Console.WriteLine("Нет доступных опросов.");
+//                return;
+//            }
+
+//            Console.WriteLine("\nДоступные опросы:");
+//            for (int i = 0; i < surveys.Count; i++)
+//            {
+//                Console.WriteLine($"{i + 1}. {surveys[i].Title}");
+//            }
+
+//            Console.Write("Выберите номер опроса: ");
+//            if (int.TryParse(Console.ReadLine(), out int surveyIndex) && surveyIndex > 0 && surveyIndex <= surveys.Count)
+//            {
+//                Survey survey = surveys[surveyIndex - 1];
+//                Console.WriteLine($"\nРезультаты опроса: {survey.Title}");
+
+//                foreach (Question question in survey.Questions)
+//                {
+//                    Console.WriteLine($"\n{question.Text}");
+
+//                    Dictionary<string, int> optionCounts = new Dictionary<string, int>();
+
+//                    foreach (int answer in survey.Answers.Keys)
+//                    {
+//                        if (answer == question.Id)
+//                        {
+//                            if (!optionCounts.ContainsKey(question.Options[survey.Answers[answer] - 1]))
+//                            {
+//                                optionCounts.Add(question.Options[survey.Answers[answer] - 1], 0);
+//                            }
+//                            optionCounts[question.Options[survey.Answers[answer] - 1]]++;
+//                        }
+//                    }
+
+//                    foreach (KeyValuePair<string, int> optionCount in optionCounts)
+//                    {
+//                        Console.WriteLine($"{optionCount.Key}: {optionCount.Value} голосов");
+//                    }
+//                }
+//            }
+//            else
+//            {
+//                Console.WriteLine("Некорректный выбор опроса.");
+//            }
+//        }
+
+//        class Survey
+//        {
+//            public string Title { get; set; }
+//            public List<Question> Questions { get; set; }
+//            public Dictionary<int, int> Answers { get; set; }
+
+//            public Survey(string title)
+//            {
+//                Title = title;
+//                Questions = new List<Question>();
+//                Answers = new Dictionary<int, int>();
+//            }
+
+//            public void AddQuestion(Question question)
+//            {
+//                question.Id = Questions.Count + 1;
+//                Questions.Add(question);
+//            }
+
+//            public void RecordAnswers(Dictionary<int, int> answers)
+//            {
+//                Answers = answers;
+//            }
+//        }
+
+//        class Question
+//        {
+//            public int Id { get; set; }
+//            public string Text { get; set; }
+//            public List<string> Options { get; set; }
+
+//            public Question(string text, List<string> options)
+//            {
+//                Text = text;
+//                Options = options;
+//            }
+//        }
+//    }
+//}
