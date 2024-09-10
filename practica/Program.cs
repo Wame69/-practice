@@ -625,33 +625,777 @@ public class PasswordGenerator
 }
 */
 //24
-void AllSum(List<int> priList)
+//24
+/*class magazine
 {
-    int sum = 0;
-    foreach (int i in priList)
+    static void Main(string[] args)
     {
-        sum =+ i;
-    }
-    Console.WriteLine(sum);
-}
-List<string> purList = new List<string>();
-List<int> priList = new List<int>();
-Console.WriteLine("Вводите ваши покупочки и их цену (в рублях)");
-Console.WriteLine("\n Чтобы закончить, введите 1");
-bool work = true;
+        Console.Write("Введите количество покупок: ");
+        int count = Convert.ToInt32(Console.ReadLine());
 
-    Console.WriteLine("Ваш товар: ");
-    string purchase = Console.ReadLine();
-    purList.Add(purchase);
-    Console.WriteLine("Добавлено: " + purchase);
-    Console.WriteLine("Стоимость товара " + purchase);
-    int price = int.Parse(Console.ReadLine());
-    Console.WriteLine("Стоимость добавлена!");
-Console.WriteLine("Ваш товар: ");
- purchase = Console.ReadLine();
-purList.Add(purchase);
-Console.WriteLine("Добавлено: " + purchase);
-Console.WriteLine("Стоимость товара " + purchase);
-price = int.Parse(Console.ReadLine());
-Console.WriteLine("Стоимость добавлена!");
-AllSum(priList);
+        List<Purchase> purchases = new List<Purchase>();
+
+        for (int i = 0; i < count; i++)
+        {
+            Console.Write($"Введите название {i + 1} покупки: ");
+            string name = Console.ReadLine();
+
+            Console.Write($"Введите стоимость {i + 1} покупки: ");
+            decimal price = Convert.ToDecimal(Console.ReadLine());
+
+            purchases.Add(new Purchase(name, price));
+        }
+
+        decimal total = 0;
+        decimal vat = 0;
+
+        Console.WriteLine("Чек:");
+        foreach (var purchase in purchases)
+        {
+            Console.WriteLine($"{purchase.Name} - {purchase.Price} руб.");
+
+            total += purchase.Price;
+            vat += purchase.Price * 0.2m; // 20% НДС
+        }
+
+        Console.WriteLine($"Общая сумма: {total} руб.");
+        Console.WriteLine($"НДС: {vat} руб.");
+        Console.WriteLine($"Итого: {total + vat} руб.");
+    }
+}
+class Purchase
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+
+    public Purchase(string name, decimal price)
+    {
+        Name = name;
+        Price = price;
+    }
+}*/
+//25
+/*using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace WordAnalyzer
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите текст:");
+            string text = Console.ReadLine();
+            string[] words = text.Split(new char[] { ' ', ',', '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+            var wordFrequency = new Dictionary<string, int>();
+
+            foreach (string word in words)
+            {
+                string lowerWord = word.ToLower();
+                if (wordFrequency.ContainsKey(lowerWord))
+                {
+                    wordFrequency[lowerWord]++;
+                }
+                else
+                {
+                    wordFrequency.Add(lowerWord, 1);
+                }
+            }
+
+            var sortedWords = wordFrequency.OrderByDescending(pair => pair.Value);
+            Console.WriteLine("Статистика частоты слов:");
+            foreach (var pair in sortedWords)
+            {
+                Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+            }
+        }
+    }
+}*/
+////26 
+/*using System;
+
+class TimeCalculator
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите первое время (часы и минуты через пробел): ");
+        string[] time1 = Console.ReadLine().Split(' ');
+        int hours1 = Convert.ToInt32(time1[0]);
+        int minutes1 = Convert.ToInt32(time1[1]);
+
+        Console.Write("Введите второе время (часы и минуты через пробел): ");
+        string[] time2 = Console.ReadLine().Split(' ');
+        int hours2 = Convert.ToInt32(time2[0]);
+        int minutes2 = Convert.ToInt32(time2[1]);
+
+        Console.Write("Выберите операцию (+ или -): ");
+        string operation = Console.ReadLine();
+
+        if (operation == "+")
+        {
+            AddTime(hours1, minutes1, hours2, minutes2);
+        }
+        else if (operation == "-")
+        {
+            SubtractTime(hours1, minutes1, hours2, minutes2);
+        }
+        else
+        {
+            Console.WriteLine("Неправильная операция");
+        }
+    }
+
+    static void AddTime(int hours1, int minutes1, int hours2, int minutes2)
+    {
+        int totalMinutes = minutes1 + minutes2;
+        int totalHours = hours1 + hours2 + totalMinutes / 60;
+        totalMinutes %= 60;
+
+        Console.WriteLine($"Результат: {totalHours} часов {totalMinutes} минут");
+    }
+
+    static void SubtractTime(int hours1, int minutes1, int hours2, int minutes2)
+    {
+        int totalMinutes = minutes1 - minutes2;
+        int totalHours = hours1 - hours2;
+
+        if (totalMinutes < 0)
+        {
+            totalMinutes += 60;
+            totalHours--;
+        }
+
+        Console.WriteLine($"Результат: {totalHours} часов {totalMinutes} минут");
+    }
+}*/
+////27
+/*using System;
+class QuadraticEquationSolver
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите коэффициент a: ");
+        double a = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент b: ");
+        double b = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент c: ");
+        double c = Convert.ToDouble(Console.ReadLine());
+
+        Solve(a, b, c);
+    }
+
+    static void Solve(double a, double b, double c)
+    {
+        if (a == 0)
+        {
+            if (b == 0)
+            {
+                if (c == 0)
+                {
+                    Console.WriteLine("Уравнение имеет бесконечно много решений");
+                }
+                else
+                {
+                    Console.WriteLine("Уравнение не имеет решений");
+                }
+            }
+            else
+            {
+                double root = -c / b;
+
+                Console.WriteLine($"Корень уравнения: x = {root}");
+            }
+        }
+        else
+        {
+            double discriminant = b * b - 4 * a * c;
+
+            if (discriminant > 0)
+            {
+                double root1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
+                double root2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
+
+                Console.WriteLine($"Корни уравнения: x1 = {root1}, x2 = {root2}");
+            }
+            else if (discriminant == 0)
+            {
+                double root = -b / (2 * a);
+
+                Console.WriteLine($"Корень уравнения: x = {root}");
+            }
+            else
+            {
+                Console.WriteLine("Уравнение не имеет вещественных корней");
+            }
+        }
+    }
+}*/
+/*////28
+using System;
+
+class LinearSystemSolver
+{
+    static void Main(string[] args)
+    {
+        Console.Write("Введите коэффициент a1: ");
+        double a1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент b1: ");
+        double b1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент c1: ");
+        double c1 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент a2: ");
+        double a2 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент b2: ");
+        double b2 = Convert.ToDouble(Console.ReadLine());
+
+        Console.Write("Введите коэффициент c2: ");
+        double c2 = Convert.ToDouble(Console.ReadLine());
+
+        SolveSystem(a1, b1, c1, a2, b2, c2);
+    }
+
+    static void SolveSystem(double a1, double b1, double c1, double a2, double b2, double c2)
+    {
+        double determinant = a1 * b2 - a2 * b1;
+
+        if (determinant == 0)
+        {
+            if (a1 * c2 - a2 * c1 == 0 && b1 * c2 - b2 * c1 == 0)
+            {
+                Console.WriteLine("Система имеет бесконечно много решений");
+            }
+            else
+            {
+                Console.WriteLine("Система не имеет решений");
+            }
+        }
+        else
+        {
+            double x = (b2 * c1 - b1 * c2) / determinant;
+            double y = (a1 * c2 - a2 * c1) / determinant;
+
+            Console.WriteLine($"Решение системы: x = {x}, y = {y}");
+        }
+    }
+}*/
+////29
+/*using System;
+using System.IO;
+
+class DiskMonitoring
+{
+    static void Main(string[] args)
+    {
+        DriveInfo[] drives = DriveInfo.GetDrives();
+
+        foreach (DriveInfo drive in drives)
+        {
+            if (drive.IsReady)
+            {
+                Console.WriteLine($"Диск: {drive.Name}");
+                Console.WriteLine($"Тип диска: {drive.DriveType}");
+                Console.WriteLine($"Общий размер: {GetFileSize(drive.TotalSize)}");
+                Console.WriteLine($"Свободное место: {GetFileSize(drive.AvailableFreeSpace)}");
+                Console.WriteLine($"Занятое место: {GetFileSize(drive.TotalSize - drive.AvailableFreeSpace)}");
+                Console.WriteLine();
+            }
+        }
+    }
+
+    static string GetFileSize(long size)
+    {
+        if (size < 1024)
+        {
+            return $"{size} байт";
+        }
+        else if (size < 1024 * 1024)
+        {
+            return $"{size / 1024} КБ";
+        }
+        else if (size < 1024 * 1024 * 1024)
+        {
+            return $"{size / (1024 * 1024)} МБ";
+        }
+        else
+        {
+            return $"{size / (1024 * 1024 * 1024)} ГБ";
+        }
+    }
+}*/
+//30
+/*using System;
+using System.IO;
+
+class FileManager
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Файловый менеджер");
+        Console.WriteLine("------------------");
+
+        while (true)
+        {
+            Console.WriteLine("1. Создать файл");
+            Console.WriteLine("2. Удалить файл");
+            Console.WriteLine("3. Копировать файл");
+            Console.WriteLine("4. Переместить файл");
+            Console.WriteLine("5. Выход");
+
+            Console.Write("Выберите операцию: ");
+            int operation = Convert.ToInt32(Console.ReadLine());
+
+            switch (operation)
+            {
+                case 1:
+                    CreateFile();
+                    break;
+                case 2:
+                    DeleteFile();
+                    break;
+                case 3:
+                    CopyFile();
+                    break;
+                case 4:
+                    MoveFile();
+                    break;
+                case 5:
+                    return;
+                default:
+                    Console.WriteLine("Неправильный выбор. Попробуйте еще раз.");
+                    break;
+            }
+        }
+    }
+
+    static void CreateFile()
+    {
+        Console.Write("Введите имя файла: ");
+        string fileName = Console.ReadLine();
+
+        try
+        {
+            using (FileStream file = File.Create(fileName))
+            {
+                Console.WriteLine("Файл создан успешно.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Ошибка создания файла: " + ex.Message);
+        }
+    }
+
+    static void DeleteFile()
+    {
+        Console.Write("Введите имя файла: ");
+        string fileName = Console.ReadLine();
+
+        try
+        {
+            File.Delete(fileName);
+            Console.WriteLine("Файл удален успешно.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Ошибка удаления файла: " + ex.Message);
+        }
+    }
+
+    static void CopyFile()
+    {
+        Console.Write("Введите имя исходного файла: ");
+        string sourceFileName = Console.ReadLine();
+
+        Console.Write("Введите имя целевого файла: ");
+        string targetFileName = Console.ReadLine();
+
+        try
+        {
+            File.Copy(sourceFileName, targetFileName);
+            Console.WriteLine("Файл скопирован успешно.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Ошибка копирования файла: " + ex.Message);
+        }
+    }
+
+    static void MoveFile()
+    {
+        Console.Write("Введите имя исходного файла: ");
+        string sourceFileName = Console.ReadLine();
+
+        Console.Write("Введите имя целевого файла: ");
+        string targetFileName = Console.ReadLine();
+
+        try
+        {
+            File.Move(sourceFileName, targetFileName);
+            Console.WriteLine("Файл перемещен успешно.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Ошибка перемещения файла: " + ex.Message);
+        }
+    }
+}*/
+//31
+/*using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+
+class JsonProcessor
+{
+    static void Main(string[] args)
+    {
+        string jsonFilePath = "data.json";
+
+        try
+        {
+            string json = File.ReadAllText(jsonFilePath);
+            List<Data> data = JsonConvert.DeserializeObject<List<Data>>(json);
+
+            Console.WriteLine("Данные из JSON-файла:");
+            Console.WriteLine("------------------------");
+
+            Console.WriteLine("| Имя | Возраст | Город |");
+            Console.WriteLine("| --- | --- | --- |");
+
+            foreach (Data item in data)
+            {
+                Console.WriteLine($"| {item.Name} | {item.Age} | {item.City} |");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Ошибка чтения JSON-файла: " + ex.Message);
+        }
+    }
+}
+
+public class Data
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string City { get; set; }
+}
+*/
+////32
+/*using System;
+using System.Data;
+
+class Xml
+{
+    static void Main(string[] args)
+    {
+        string xmlFilePath = "data.xml";
+
+        try
+        {
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(xmlFilePath);
+
+            Console.WriteLine("Данные из XML-файла:");
+            Console.WriteLine("------------------------");
+
+            foreach (DataTable table in dataSet.Tables)
+            {
+                Console.WriteLine($"Таблица: {table.TableName}");
+
+                foreach (DataColumn column in table.Columns)
+                {
+                    Console.Write($"| {column.ColumnName} |");
+                }
+
+                Console.WriteLine();
+
+                foreach (DataRow row in table.Rows)
+                {
+                    foreach (object value in row.ItemArray)
+                    {
+                        Console.Write($"| {value} |");
+                    }
+
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Ошибка чтения XML-файла: " + ex.Message);
+        }
+    }
+}
+*/
+////33
+/*using System;
+using System.Collections.Generic;
+
+class TodoList
+{
+    private List<TodoItem> _todoItems = new List<TodoItem>();
+
+    public void Run()
+    {
+        while (true)
+        {
+            Console.WriteLine("Ведение списка дел:");
+            Console.WriteLine("------------------------");
+            Console.WriteLine("1. Добавить задачу");
+            Console.WriteLine("2. Удалить задачу");
+            Console.WriteLine("3. Отметить задачу как выполненную");
+            Console.WriteLine("4. Показать список задач");
+            Console.WriteLine("5. Выход");
+
+            Console.Write("Выберите действие: ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    AddTodoItem();
+                    break;
+                case 2:
+                    RemoveTodoItem();
+                    break;
+                case 3:
+                    MarkTodoItemAsDone();
+                    break;
+                case 4:
+                    ShowTodoList();
+                    break;
+                case 5:
+                    return;
+                default:
+                    Console.WriteLine("Неверный выбор. Попробуйте снова.");
+                    break;
+            }
+        }
+    }
+
+    private void AddTodoItem()
+    {
+        Console.Write("Введите описание задачи: ");
+        string description = Console.ReadLine();
+
+        TodoItem todoItem = new TodoItem { Description = description, IsDone = false };
+        _todoItems.Add(todoItem);
+
+        Console.WriteLine("Задача добавлена.");
+    }
+
+    private void RemoveTodoItem()
+    {
+        Console.Write("Введите номер задачи для удаления: ");
+        int index = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        if (index >= 0 && index < _todoItems.Count)
+        {
+            _todoItems.RemoveAt(index);
+            Console.WriteLine("Задача удалена.");
+        }
+        else
+        {
+            Console.WriteLine("Неверный номер задачи.");
+        }
+    }
+
+    private void MarkTodoItemAsDone()
+    {
+        Console.Write("Введите номер задачи для отметки как выполненной: ");
+        int index = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        if (index >= 0 && index < _todoItems.Count)
+        {
+            _todoItems[index].IsDone = true;
+            Console.WriteLine("Задача отмечена как выполненная.");
+        }
+        else
+        {
+            Console.WriteLine("Неверный номер задачи.");
+        }
+    }
+
+    private void ShowTodoList()
+    {
+        Console.WriteLine("Список задач:");
+        Console.WriteLine("------------------------");
+
+        for (int i = 0; i < _todoItems.Count; i++)
+        {
+            TodoItem todoItem = _todoItems[i];
+            string status = todoItem.IsDone ? "Выполнена" : "Не выполнена";
+
+            Console.WriteLine($"{i + 1}. {todoItem.Description} - {status}");
+        }
+    }
+}
+
+public class TodoItem
+{
+    public string Description { get; set; }
+    public bool IsDone { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        TodoList todoList = new TodoList();
+        todoList.Run();
+    }
+}*/
+//34
+//using System;
+//using System.IO;
+
+//class FileProcessor
+//{
+//    public void Run()
+//    {
+//        Console.Write("Введите имя файла для чтения: ");
+//        string inputFileName = Console.ReadLine();
+
+//        Console.Write("Введите имя файла для записи: ");
+//        string outputFileName = Console.ReadLine();
+
+//        try
+//        {
+//            string text = File.ReadAllText(inputFileName);
+//            string modifiedText = ModifyText(text);
+
+//            File.WriteAllText(outputFileName, modifiedText);
+
+//            Console.WriteLine("Текст записан в файл.");
+//        }
+//        catch (FileNotFoundException)
+//        {
+//            Console.WriteLine("Файл для чтения не найден.");
+//        }
+//        catch (Exception ex)
+//        {
+//            Console.WriteLine("Ошибка: " + ex.Message);
+//        }
+//    }
+
+//    private string ModifyText(string text)
+//    {
+//        char[] chars = text.ToCharArray();
+
+//        for (int i = 0; i < chars.Length; i++)
+//        {
+//            if (char.IsLower(chars[i]))
+//            {
+//                chars[i] = char.ToUpper(chars[i]);
+//            }
+//            else if (char.IsUpper(chars[i]))
+//            {
+//                chars[i] = char.ToLower(chars[i]);
+//            }
+//        }
+
+//        return new string(chars);
+//    }
+//}
+
+//class Program
+//{
+//    static void Main(string[] args)
+//    {
+//        FileProcessor fileProcessor = new FileProcessor();
+//        fileProcessor.Run();
+//    }
+//}
+
+////35
+/*using System;
+using System.Collections.Generic;
+
+class Calendar
+{
+    private Dictionary<DateTime, string> _notes = new Dictionary<DateTime, string>();
+    private int _year;
+    private int _month;
+
+    public Calendar(int year, int month)
+    {
+        _year = year;
+        _month = month;
+    }
+
+    public void Run()
+    {
+        Console.WriteLine($"Календарь на {_month} {_year} год");
+
+        int daysInMonth = DateTime.DaysInMonth(_year, _month);
+        int firstDayOfWeek = (int)new DateTime(_year, _month, 1).DayOfWeek;
+
+        Console.WriteLine(" Пн  Вт  Ср  Чт   Пт  Сб  Вс");
+
+        for (int i = 0; i < firstDayOfWeek; i++)
+        {
+            Console.Write("  ");
+        }
+
+       
+        for (int i = 1; i <= daysInMonth; i++)
+        {
+            Console.Write($"{i,3} ");
+
+           
+            if ((i + firstDayOfWeek) % 7 == 0)
+            {
+                Console.WriteLine();
+            }
+        }
+
+        Console.WriteLine();
+
+        for (int i = 1; i <= daysInMonth; i++)
+        {
+            DateTime date = new DateTime(_year, _month, i);
+            Console.Write($"Введите заметку для {i} числа {(_notes.ContainsKey(date) ? "y/n" : "")}: ");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "y")
+            {
+                Console.Write("Введите заметку: ");
+                string note = Console.ReadLine();
+                _notes[date] = note; 
+            }
+            else if (input.ToLower() == "n" && _notes.ContainsKey(date))
+            {
+                _notes.Remove(date);
+            }
+        }
+
+        Console.WriteLine("Заметки:");
+   
+        foreach (var note in _notes)
+        {
+            Console.WriteLine($"{note.Key.Day} число: {note.Value}");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int year = DateTime.Now.Year;
+        int month = DateTime.Now.Month;
+
+        Calendar calendar = new Calendar(year, month);
+        calendar.Run();
+    }
+}*/
