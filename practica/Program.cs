@@ -378,7 +378,7 @@
 //    Console.Write($"{arr[i]} ");
 //}
 //Console.WriteLine();
-//taski 16
+//16
 /*Console.WriteLine("Введите размер матрицы AxB");
 int a = int.Parse(Console.ReadLine());
 int b = int.Parse(Console.ReadLine());
@@ -449,7 +449,7 @@ for (int i = 0; i < a; i++)
     }
     Console.WriteLine(" ");
 }*/
-//task17
+//17
 /*Console.WriteLine("Введите ваше 10-ное число");
 int num = int.Parse(Console.ReadLine());
 Console.WriteLine("Введите систему счисления для перевода (2, 8, 16)");
@@ -469,7 +469,7 @@ switch (choice)
         Console.WriteLine(result2);
         break;
 }*/
-//task18
+//18
 /*Console.WriteLine("Числовая пирамида");
 int l = 1 + 2 * (10 - 1);
 int n = 1;
@@ -478,7 +478,7 @@ for (int i = 0; i < 10; i++)
     Console.WriteLine(new string(' ', (int)(l - n / 2)) + new string('1', n));
     n += 2;
 }*/
-/*//task19
+/*//19
 Console.WriteLine("Введите строку");
 string str = Console.ReadLine();
 Console.WriteLine("Введите подстроку для поиска");
@@ -501,7 +501,7 @@ while (str.Contains("  "))
     str = str.Replace("  ", " ");
 }
 Console.WriteLine(str);
-//task 21
+//21
 /*Console.WriteLine("Введите первую дату (ДД.ММ.ГГГГ):");
 string firstDateInput = Console.ReadLine();
 Console.WriteLine("Введите вторую дату (ДД.ММ.ГГГГ):");
@@ -519,7 +519,7 @@ else
 {
     Console.WriteLine("Некорректный формат даты. Используйте формат ДД.ММ.ГГГГ.");
 }*/
-//task 22
+//22
 /*using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Security.Cryptography.X509Certificates;
@@ -582,7 +582,7 @@ switch (choice)
         break;
 }
     */
-    /*//task 23
+    /*//23
 public class PasswordGenerator
 {
     public static string GeneratePassword(int length, bool useLowercase, bool useUppercase, bool useNumbers, bool useSpecial)
@@ -624,7 +624,7 @@ public class PasswordGenerator
     }
 }
 */
-//task 24
+//24
 void AllSum(List<int> priList)
 {
     int sum = 0;
