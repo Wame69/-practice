@@ -2933,3 +2933,290 @@ namespace StudentGradeSystem
 //        }
 //    }
 //}
+//51
+/*using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace WeatherAnalysis
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<WeatherData> weatherData = LoadWeatherData("weather_data.csv");
+
+            Dictionary<int, WeatherStatistics> monthlyStatistics = AnalyzeWeatherData(weatherData);
+
+            Console.WriteLine("Статистика погодных данных:");
+            Console.WriteLine("--------------------------");
+
+            foreach (KeyValuePair<int, WeatherStatistics> monthStat in monthlyStatistics)
+            {
+                Console.WriteLine($"\nМесяц: {monthStat.Key}");
+                Console.WriteLine($"Средняя температура: {monthStat.Value.AverageTemperature:F2}°C");
+                Console.WriteLine($"Количество осадков: {monthStat.Value.TotalPrecipitation:F2} мм");
+            }
+        }
+        class WeatherData
+        {
+            public DateTime Date { get; set; }
+            public double Temperature { get; set; }
+            public double Precipitation { get; set; }
+
+            public WeatherData(DateTime date, double temperature, double precipitation)
+            {
+                Date = date;
+                Temperature = temperature;
+                Precipitation = precipitation;
+            }
+        }
+
+        class WeatherStatistics
+        {
+            public double AverageTemperature { get; set; }
+            public double TotalPrecipitation { get; set; }
+        }
+        static List<WeatherData> LoadWeatherData(string filePath)
+        {
+            List<WeatherData> weatherData = new List<WeatherData>();
+
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                reader.ReadLine();
+
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length == 3)
+                    {
+                        DateTime date = DateTime.Parse(parts[0]);
+                        double temperature = double.Parse(parts[1]);
+                        double precipitation = double.Parse(parts[2]);
+
+                        weatherData.Add(new WeatherData(date, temperature, precipitation));
+                    }
+                }
+            }
+
+            return weatherData;
+        }
+
+        static Dictionary<int, WeatherStatistics> AnalyzeWeatherData(List<WeatherData> weatherData)
+        {
+            Dictionary<int, WeatherStatistics> monthlyStatistics = new Dictionary<int, WeatherStatistics>();
+
+            foreach (WeatherData data in weatherData)
+            {
+                int month = data.Date.Month;
+
+                if (monthlyStatistics.ContainsKey(month))
+                {
+                    monthlyStatistics[month].AverageTemperature += data.Temperature;
+                    monthlyStatistics[month].TotalPrecipitation += data.Precipitation;
+                }
+                else
+                {
+                    monthlyStatistics.Add(month, new WeatherStatistics()
+                    {
+                        AverageTemperature = data.Temperature,
+                        TotalPrecipitation = data.Precipitation
+                    });
+                }
+            }
+
+            foreach (KeyValuePair<int, WeatherStatistics> monthStat in monthlyStatistics)
+            {
+                monthStat.Value.AverageTemperature /= weatherData.Where(d => d.Date.Month == monthStat.Key).Count();
+            }
+
+            return monthlyStatistics;
+        }
+    }
+}
+*/
+////52
+//using System;
+//using System.Collections.Generic;
+
+//namespace LibraryBookTracker
+//{
+//    class Program
+//    {
+//        static List<Book> books = new List<Book>();
+
+//        static void Main(string[] args)
+//        {
+//            while (true)
+//            {
+//                Console.WriteLine("Выберите действие:");
+//                Console.WriteLine("1. Добавить книгу");
+//                Console.WriteLine("2. Удалить книгу");
+//                Console.WriteLine("3. Редактировать книгу");
+//                Console.WriteLine("4. Найти книгу");
+//                Console.WriteLine("5. Вывести список книг");
+//                Console.WriteLine("6. Выход");
+
+//                Console.Write("Введите номер действия: ");
+//                string choice = Console.ReadLine();
+
+//                switch (choice)
+//                {
+//                    case "1":
+//                        AddBook();
+//                        break;
+//                    case "2":
+//                        RemoveBook();
+//                        break;
+//                    case "3":
+//                        EditBook();
+//                        break;
+//                    case "4":
+//                        FindBook();
+//                        break;
+//                    case "5":
+//                        PrintBookList();
+//                        break;
+//                    case "6":
+//                        Console.WriteLine("До свидания!");
+//                        return;
+//                    default:
+//                        Console.WriteLine("Некорректный выбор действия.");
+//                        break;
+//                }
+//            }
+//        }
+
+//        static void AddBook()
+//        {
+//            Console.Write("Введите название книги: ");
+//            string title = Console.ReadLine();
+
+//            Console.Write("Введите автора книги: ");
+//            string author = Console.ReadLine();
+
+//            Console.Write("Введите жанр книги: ");
+//            string genre = Console.ReadLine();
+
+//            books.Add(new Book(title, author, genre));
+//            Console.WriteLine("Книга добавлена.");
+//        }
+
+//        static void RemoveBook()
+//        {
+//            Console.Write("Введите название книги для удаления: ");
+//            string title = Console.ReadLine();
+
+//            Book bookToRemove = books.Find(b => b.Title == title);
+
+//            if (bookToRemove != null)
+//            {
+//                books.Remove(bookToRemove);
+//                Console.WriteLine("Книга удалена.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Книга не найдена.");
+//            }
+//        }
+
+//        static void EditBook()
+//        {
+//            Console.Write("Введите название книги для редактирования: ");
+//            string title = Console.ReadLine();
+
+//            Book bookToEdit = books.Find(b => b.Title == title);
+
+//            if (bookToEdit != null)
+//            {
+//                Console.WriteLine("\nВыберите поле для редактирования:");
+//                Console.WriteLine("1. Название");
+//                Console.WriteLine("2. Автор");
+//                Console.WriteLine("3. Жанр");
+
+//                Console.Write("Введите номер поля: ");
+//                string fieldChoice = Console.ReadLine();
+
+//                switch (fieldChoice)
+//                {
+//                    case "1":
+//                        Console.Write("Введите новое название: ");
+//                        bookToEdit.Title = Console.ReadLine();
+//                        break;
+//                    case "2":
+//                        Console.Write("Введите нового автора: ");
+//                        bookToEdit.Author = Console.ReadLine();
+//                        break;
+//                    case "3":
+//                        Console.Write("Введите новый жанр: ");
+//                        bookToEdit.Genre = Console.ReadLine();
+//                        break;
+//                    default:
+//                        Console.WriteLine("Некорректный выбор поля.");
+//                        break;
+//                }
+
+//                Console.WriteLine("Книга отредактирована.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Книга не найдена.");
+//            }
+//        }
+
+//        static void FindBook()
+//        {
+//            Console.Write("Введите текст для поиска: ");
+//            string searchText = Console.ReadLine();
+
+//            List<Book> foundBooks = books.FindAll(b =>
+//                b.Title.Contains(searchText) ||
+//                b.Author.Contains(searchText) ||
+//                b.Genre.Contains(searchText));
+
+//            if (foundBooks.Count > 0)
+//            {
+//                Console.WriteLine("\nНайденные книги:");
+//                foreach (Book book in foundBooks)
+//                {
+//                    Console.WriteLine($"Название: {book.Title}, Автор: {book.Author}, Жанр: {book.Genre}");
+//                }
+//            }
+//            else
+//            {
+//                Console.WriteLine("Книги не найдены.");
+//            }
+//        }
+
+//        static void PrintBookList()
+//        {
+//            if (books.Count == 0)
+//            {
+//                Console.WriteLine("Список книг пуст.");
+//                return;
+//            }
+
+//            Console.WriteLine("\nСписок всех книг:");
+//            foreach (Book book in books)
+//            {
+//                Console.WriteLine($"Название: {book.Title}, Автор: {book.Author}, Жанр: {book.Genre}");
+//            }
+//        }
+//    }
+
+//    class Book
+//    {
+//        public string Title { get; set; }
+//        public string Author { get; set; }
+//        public string Genre { get; set; }
+
+//        public Book(string title, string author, string genre)
+//        {
+//            Title = title;
+//            Author = author;
+//            Genre = genre;
+//        }
+//    }
+//}
