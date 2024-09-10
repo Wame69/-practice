@@ -1399,3 +1399,674 @@ class Program
         calendar.Run();
     }
 }*/
+//task 36
+/*using System;
+using System.Collections.Generic;
+
+namespace StudentGradeSystem
+{
+    class Student
+    {
+        public string Name { get; set; }
+        public string Group { get; set; }
+        public Dictionary<string, List<int>> Grades { get; set; } = new Dictionary<string, List<int>>();
+
+        public Student(string name, string group)
+        {
+            Name = name;
+            Group = group;
+        }
+
+        public void AddGrade(string subject, int grade)
+        {
+            if (Grades.ContainsKey(subject))
+            {
+                Grades[subject].Add(grade);
+            }
+            else
+            {
+                Grades.Add(subject, new List<int>() { grade });
+            }
+        }
+
+        public double GetAverageGrade()
+        {
+            if (Grades.Count == 0)
+            {
+                return 0;
+            }
+
+            int totalGrades = 0;
+            foreach (var subjectGrades in Grades.Values)
+            {
+                totalGrades += subjectGrades.Sum();
+            }
+
+            return (double)totalGrades / Grades.Count;
+        }
+    }
+
+    class GradeSystem
+    {
+        private Dictionary<string, Student> Students { get; set; } = new Dictionary<string, Student>();
+
+        public void AddStudent()
+        {
+            Console.WriteLine("Введите имя студента:");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Введите группу студента:");
+            string group = Console.ReadLine();
+
+            if (!Students.ContainsKey(name))
+            {
+                Students.Add(name, new Student(name, group));
+                Console.WriteLine($"Студент {name} добавлен в систему.");
+            }
+            else
+            {
+                Console.WriteLine($"Студент {name} уже существует в системе.");
+            }
+        }
+
+        public void AddGrade()
+        {
+            Console.WriteLine("Введите имя студента:");
+            string studentName = Console.ReadLine();
+
+            if (Students.ContainsKey(studentName))
+            {
+                Console.WriteLine("Введите предмет:");
+                string subject = Console.ReadLine();
+
+                Console.WriteLine("Введите оценку:");
+                if (int.TryParse(Console.ReadLine(), out int grade))
+                {
+                    Students[studentName].AddGrade(subject, grade);
+                    Console.WriteLine($"Оценка {grade} по предмету {subject} добавлена для {studentName}.");
+                }
+                else
+                {
+                    Console.WriteLine("Некорректный ввод оценки.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Студент {studentName} не найден в системе.");
+            }
+        }
+
+        public void GetStudentInfo()
+        {
+            Console.WriteLine("Введите имя студента:");
+            string studentName = Console.ReadLine();
+            GetStudentInfo(studentName);
+        }
+
+        public void GetStudentInfo(string studentName)
+        {
+            if (Students.ContainsKey(studentName))
+            {
+                Student student = Students[studentName];
+                Console.WriteLine($"Студент: {student.Name}, Группа: {student.Group}");
+                Console.WriteLine("Оценки:");
+                foreach (var subject in student.Grades)
+                {
+                    Console.WriteLine($"{subject.Key}: {string.Join(", ", subject.Value)}");
+                }
+                Console.WriteLine($"Средний балл: {student.GetAverageGrade():F2}");
+            }
+            else
+            {
+                Console.WriteLine($"Студент {studentName} не найден в системе.");
+            }
+        }
+
+        public void GetAllStudents()
+        {
+            if (Students.Count == 0)
+            {
+                Console.WriteLine("В системе нет студентов.");
+            }
+            else
+            {
+                foreach (var student in Students.Values)
+                {
+                    Console.WriteLine($"Студент: {student.Name}, Группа: {student.Group}");
+                }
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            GradeSystem system = new GradeSystem();
+
+            while (true)
+            {
+                Console.WriteLine("Выберите действие:");
+                Console.WriteLine("1. Добавить студента");
+                Console.WriteLine("2. Добавить оценку");
+                Console.WriteLine("3. Вывести информацию о студенте");
+                Console.WriteLine("4. Вывести всех студентов");
+                Console.WriteLine("5. Выход");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        system.AddStudent();
+                        break;
+                    case "2":
+                        system.AddGrade();
+                        break;
+                    case "3":
+                        system.GetStudentInfo();
+                        break;
+                    case "4":
+                        system.GetAllStudents();
+                        break;
+                    case "5":
+                        Console.WriteLine("До свидания!");
+                        return;
+                    default:
+                        Console.WriteLine("Некорректный выбор.");
+                        break;
+                }
+            }
+        }
+    }
+}*/
+//37
+//using System;
+//using System.Collections.Generic;
+
+//namespace ContactBook
+//{
+//    class Contact
+//    {
+//        public string Name { get; set; }
+//        public string Phone { get; set; }
+//        public string Email { get; set; }
+
+//        public Contact(string name, string phone, string email)
+//        {
+//            Name = name;
+//            Phone = phone;
+//            Email = email;
+//        }
+//    }
+
+//    class ContactBook
+//    {
+//        private List<Contact> contacts = new List<Contact>();
+
+//        public void AddContact()
+//        {
+//            Console.WriteLine("Введите имя контакта:");
+//            string name = Console.ReadLine();
+
+//            Console.WriteLine("Введите телефон контакта:");
+//            string phone = Console.ReadLine();
+
+//            Console.WriteLine("Введите email контакта:");
+//            string email = Console.ReadLine();
+
+//            contacts.Add(new Contact(name, phone, email));
+//            Console.WriteLine("Контакт добавлен.");
+//        }
+
+//        public void DeleteContact()
+//        {
+//            Console.WriteLine("Введите имя контакта для удаления:");
+//            string name = Console.ReadLine();
+
+//            Contact contactToDelete = contacts.Find(c => c.Name == name);
+
+//            if (contactToDelete != null)
+//            {
+//                contacts.Remove(contactToDelete);
+//                Console.WriteLine("Контакт удален.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Контакт не найден.");
+//            }
+//        }
+
+//        public void EditContact()
+//        {
+//            Console.WriteLine("Введите имя контакта для редактирования:");
+//            string name = Console.ReadLine();
+
+//            Contact contactToEdit = contacts.Find(c => c.Name == name);
+
+//            if (contactToEdit != null)
+//            {
+//                Console.WriteLine("Введите новое имя (пустое поле для пропуска):");
+//                string newName = Console.ReadLine();
+//                if (!string.IsNullOrEmpty(newName))
+//                {
+//                    contactToEdit.Name = newName;
+//                }
+
+//                Console.WriteLine("Введите новый телефон (пустое поле для пропуска):");
+//                string newPhone = Console.ReadLine();
+//                if (!string.IsNullOrEmpty(newPhone))
+//                {
+//                    contactToEdit.Phone = newPhone;
+//                }
+
+//                Console.WriteLine("Введите новый email (пустое поле для пропуска):");
+//                string newEmail = Console.ReadLine();
+//                if (!string.IsNullOrEmpty(newEmail))
+//                {
+//                    contactToEdit.Email = newEmail;
+//                }
+
+//                Console.WriteLine("Контакт изменен.");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Контакт не найден.");
+//            }
+//        }
+
+//        public void SearchContact()
+//        {
+//            Console.WriteLine("Введите имя контакта для поиска:");
+//            string name = Console.ReadLine();
+
+//            Contact foundContact = contacts.Find(c => c.Name == name);
+
+//            if (foundContact != null)
+//            {
+//                Console.WriteLine($"Имя: {foundContact.Name}");
+//                Console.WriteLine($"Телефон: {foundContact.Phone}");
+//                Console.WriteLine($"Email: {foundContact.Email}");
+//            }
+//            else
+//            {
+//                Console.WriteLine("Контакт не найден.");
+//            }
+//        }
+
+//        public void ShowAllContacts()
+//        {
+//            if (contacts.Count == 0)
+//            {
+//                Console.WriteLine("В телефонной книге нет контактов.");
+//                return;
+//            }
+
+//            Console.WriteLine("Список контактов:");
+//            foreach (Contact contact in contacts)
+//            {
+//                Console.WriteLine($"Имя: {contact.Name}, Телефон: {contact.Phone}, Email: {contact.Email}");
+//            }
+//        }
+//    }
+
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            ContactBook contactBook = new ContactBook();
+
+//            while (true)
+//            {
+//                Console.WriteLine("Выберите действие:");
+//                Console.WriteLine("1. Добавить контакт");
+//                Console.WriteLine("2. Удалить контакт");
+//                Console.WriteLine("3. Редактировать контакт");
+//                Console.WriteLine("4. Найти контакт");
+//                Console.WriteLine("5. Показать все контакты");
+//                Console.WriteLine("6. Выход");
+
+//                string choice = Console.ReadLine();
+
+//                switch (choice)
+//                {
+//                    case "1":
+//                        contactBook.AddContact();
+//                        break;
+//                    case "2":
+//                        contactBook.DeleteContact();
+//                        break;
+//                    case "3":
+//                        contactBook.EditContact();
+//                        break;
+//                    case "4":
+//                        contactBook.SearchContact();
+//                        break;
+//                    case "5":
+//                        contactBook.ShowAllContacts();
+//                        break;
+//                    case "6":
+//                        Console.WriteLine("До свидания!");
+//                        return;
+//                    default:
+//                        Console.WriteLine("Некорректный выбор.");
+//                        break;
+//                }
+//            }
+//        }
+//    }
+//}
+
+//38
+//using System;
+
+//namespace TicTacToe
+//{
+//    class Program
+//    {
+//        static char[,] board = new char[3, 3];
+//        static char currentPlayer = 'X';
+
+//        static void Main(string[] args)
+//        {
+//            InitializeBoard();
+
+//            while (true)
+//            {
+//                DisplayBoard();
+
+//                Console.WriteLine($"Ход игрока {currentPlayer}:");
+//                Console.WriteLine("Введите номер строки (1-3):");
+//                int row = int.Parse(Console.ReadLine()) - 1;
+//                Console.WriteLine("Введите номер столбца (1-3):");
+//                int col = int.Parse(Console.ReadLine()) - 1;
+
+//                if (IsValidMove(row, col))
+//                {
+//                    MakeMove(row, col);
+//                    if (CheckWin())
+//                    {
+//                        DisplayBoard();
+//                        Console.WriteLine($"Игрок {currentPlayer} победил!");
+//                        break;
+//                    }
+//                    else if (CheckDraw())
+//                    {
+//                        DisplayBoard();
+//                        Console.WriteLine("Ничья!");
+//                        break;
+//                    }
+
+//                    SwitchPlayer();
+//                }
+//                else
+//                {
+//                    Console.WriteLine("Неверный ход. Попробуйте снова.");
+//                }
+//            }
+
+//            Console.ReadKey();
+//        }
+
+//        static void InitializeBoard()
+//        {
+//            for (int i = 0; i < 3; i++)
+//            {
+//                for (int j = 0; j < 3; j++)
+//                {
+//                    board[i, j] = ' ';
+//                }
+//            }
+//        }
+
+//        static void DisplayBoard()
+//        {
+//            Console.WriteLine("  1 2 3");
+//            for (int i = 0; i < 3; i++)
+//            {
+//                Console.Write($"{i + 1} ");
+//                for (int j = 0; j < 3; j++)
+//                {
+//                    Console.Write($"{board[i, j]} ");
+//                }
+//                Console.WriteLine();
+//            }
+//        }
+
+//        static bool IsValidMove(int row, int col)
+//        {
+//            return row >= 0 && row < 3 && col >= 0 && col < 3 && board[row, col] == ' ';
+//        }
+
+//        static void MakeMove(int row, int col)
+//        {
+//            board[row, col] = currentPlayer;
+//        }
+
+//        static void SwitchPlayer()
+//        {
+//            currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+//        }
+
+//        static bool CheckWin()
+//        {
+//            Проверка строк
+//            for (int i = 0; i < 3; i++)
+//            {
+//                if (board[i, 0] == currentPlayer && board[i, 1] == currentPlayer && board[i, 2] == currentPlayer)
+//                {
+//                    return true;
+//                }
+//            }
+
+//            Проверка столбцов
+//            for (int j = 0; j < 3; j++)
+//            {
+//                if (board[0, j] == currentPlayer && board[1, j] == currentPlayer && board[2, j] == currentPlayer)
+//                {
+//                    return true;
+//                }
+//            }
+
+//            Проверка диагоналей
+//            if ((board[0, 0] == currentPlayer && board[1, 1] == currentPlayer && board[2, 2] == currentPlayer) ||
+//                (board[0, 2] == currentPlayer && board[1, 1] == currentPlayer && board[2, 0] == currentPlayer))
+//            {
+//                return true;
+//            }
+
+//            return false;
+//        }
+
+//        static bool CheckDraw()
+//        {
+//            for (int i = 0; i < 3; i++)
+//            {
+//                for (int j = 0; j < 3; j++)
+//                {
+//                    if (board[i, j] == ' ')
+//                    {
+//                        return false;
+//                    }
+//                }
+//            }
+
+//            return true;
+//        }
+//    }
+//}
+//39
+//using System;
+
+//namespace BullsAndCows
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            Console.WriteLine("Добро пожаловать в игру 'Быки и коровы'!");
+
+//            // Загадываем случайное четырехзначное число с уникальными цифрами
+//            int secretNumber = GenerateSecretNumber();
+
+//            while (true)
+//            {
+//                Console.Write("Введите ваше предположение (четыре цифры): ");
+//                string guess = Console.ReadLine();
+
+//                if (guess.Length != 4 || !int.TryParse(guess, out int guessNumber))
+//                {
+//                    Console.WriteLine("Некорректный ввод. Пожалуйста, введите четырехзначное число.");
+//                    continue;
+//                }
+
+//                int bulls = CountBulls(secretNumber, guessNumber);
+//                int cows = CountCows(secretNumber, guessNumber, bulls);
+
+//                Console.WriteLine($"Быки: {bulls}, Коровы: {cows}");
+
+//                if (bulls == 4)
+//                {
+//                    Console.WriteLine("Поздравляем! Вы угадали!");
+//                    break;
+//                }
+//            }
+//        }
+
+//        static int GenerateSecretNumber()
+//        {
+//            Random random = new Random();
+//            int number;
+//            do
+//            {
+//                number = random.Next(1000, 10000);
+//            } while (HasDuplicateDigits(number));
+//            return number;
+//        }
+
+//        static bool HasDuplicateDigits(int number)
+//        {
+//            int[] digits = new int[10];
+//            while (number > 0)
+//            {
+//                int digit = number % 10;
+//                if (digits[digit] > 0)
+//                {
+//                    return true;
+//                }
+//                digits[digit]++;
+//                number /= 10;
+//            }
+//            return false;
+//        }
+
+//        static int CountBulls(int secretNumber, int guessNumber)
+//        {
+//            int bulls = 0;
+//            for (int i = 0; i < 4; i++)
+//            {
+//                if ((secretNumber % 10) == (guessNumber % 10))
+//                {
+//                    bulls++;
+//                }
+//                secretNumber /= 10;
+//                guessNumber /= 10;
+//            }
+//            return bulls;
+//        }
+
+//        static int CountCows(int secretNumber, int guessNumber, int bulls)
+//        {
+//            int cows = 0;
+//            int[] secretDigits = new int[10];
+//            int[] guessDigits = new int[10];
+//            for (int i = 0; i < 4; i++)
+//            {
+//                int secretDigit = secretNumber % 10;
+//                int guessDigit = guessNumber % 10;
+//                secretDigits[secretDigit]++;
+//                guessDigits[guessDigit]++;
+//                secretNumber /= 10;
+//                guessNumber /= 10;
+//            }
+//            for (int i = 0; i < 10; i++)
+//            {
+//                cows += Math.Min(secretDigits[i], guessDigits[i]);
+//            }
+//            return cows - bulls;
+//        }
+//    }
+//}
+//40
+//using System;
+
+//namespace BankomatSimulation
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            double balance = 0;
+
+//            while (true)
+//            {
+//                Console.WriteLine("Выберите действие:");
+//                Console.WriteLine("1. Внести средства");
+//                Console.WriteLine("2. Снять средства");
+//                Console.WriteLine("3. Просмотреть баланс");
+//                Console.WriteLine("4. Выход");
+
+//                Console.Write("Введите номер действия: ");
+//                string choice = Console.ReadLine();
+
+//                switch (choice)
+//                {
+//                    case "1":
+//                        Console.Write("Введите сумму для внесения: ");
+//                        if (double.TryParse(Console.ReadLine(), out double depositAmount))
+//                        {
+//                            balance += depositAmount;
+//                            Console.WriteLine($"Внесено {depositAmount:C}. Новый баланс: {balance:C}");
+//                        }
+//                        else
+//                        {
+//                            Console.WriteLine("Некорректный ввод суммы.");
+//                        }
+//                        break;
+
+//                    case "2":
+//                        Console.Write("Введите сумму для снятия: ");
+//                        if (double.TryParse(Console.ReadLine(), out double withdrawAmount))
+//                        {
+//                            if (withdrawAmount <= balance)
+//                            {
+//                                balance -= withdrawAmount;
+//                                Console.WriteLine($"Снято {withdrawAmount:C}. Новый баланс: {balance:C}");
+//                            }
+//                            else
+//                            {
+//                                Console.WriteLine("Недостаточно средств.");
+//                            }
+//                        }
+//                        else
+//                        {
+//                            Console.WriteLine("Некорректный ввод суммы.");
+//                        }
+//                        break;
+
+//                    case "3":
+//                        Console.WriteLine($"Текущий баланс: {balance:C}");
+//                        break;
+
+//                    case "4":
+//                        Console.WriteLine("До свидания!");
+//                        return;
+
+//                    default:
+//                        Console.WriteLine("Некорректный выбор действия.");
+//                        break;
+//                }
+//            }
+//        }
+//    }
+//}
